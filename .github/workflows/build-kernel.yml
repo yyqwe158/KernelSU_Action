@@ -203,9 +203,11 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace
         ls -l android-kernel/out/arch/arm64/boot
         ls -l android-kernel/out/arch/arm64/boot/dts
+        ls -l android-kernel/out/arch/arm64/boot/dts/vendor
+        tree
         tools/unpack_bootimg.py --boot_img boot-source.img
         cp android-kernel/out/arch/${{ env.ARCH }}/boot/${{ env.KERNEL_IMAGE_NAME }} out/kernel
-        cp android-kernel/out/arch/${{ env.ARCH }}/boot/dts/dtb out/kernel
+        cp boot/* out/kernel
         tools/mkbootimg.py ${{ env.FORMAT_MKBOOTING }} -o boot.img
         if [ -f boot.img ]; then
             echo "MAKE_BOOT_IMAGE_IS_OK=true" >> $GITHUB_ENV
