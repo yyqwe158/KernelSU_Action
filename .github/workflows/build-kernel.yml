@@ -200,6 +200,7 @@ jobs:
       if: env.HAVE_SOURCE_BOOT_IMAGE == 'true' && env.CHECK_FILE_IS_OK == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
+        ls -l android-kernel/out/arch/arm64/boot
         tools/unpack_bootimg.py --boot_img boot-source.img
         cp android-kernel/out/arch/${{ env.ARCH }}/boot/${{ env.KERNEL_IMAGE_NAME }} out/kernel
         tools/mkbootimg.py ${{ env.FORMAT_MKBOOTING }} -o boot.img
