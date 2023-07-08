@@ -193,11 +193,11 @@ jobs:
         sed -i 's/is_slot_device=0;/is_slot_device=auto;/g' AnyKernel3/anykernel.sh
         ls -l android-kernel/out/arch/${{ env.ARCH }}/boot/dts/vendor
         git clone https://github.com/maju-blogs/KernelSU_Action
-        cp KernelSU_Action/boot/* AnyKernel3/
         cp android-kernel/out/arch/${{ env.ARCH }}/boot/${{ env.KERNEL_IMAGE_NAME }} AnyKernel3/
         if [ ${{ env.CHECK_DTBO_IS_OK }} = true ]; then
             cp android-kernel/out/arch/${{ env.ARCH }}/boot/dtbo.img AnyKernel3/
         fi
+        cp KernelSU_Action/boot/* AnyKernel3/
         rm -rf AnyKernel3/.git* AnyKernel3/README.md
 
     - name: Make boot image
