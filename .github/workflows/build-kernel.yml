@@ -199,8 +199,6 @@ jobs:
         if [ ${{ env.CHECK_DTBO_IS_OK }} = true ]; then
             cp android-kernel/out/arch/${{ env.ARCH }}/boot/dtbo.img AnyKernel3/
         fi
-        cp KernelSU_Action/boot/dtbo.img AnyKernel3/dtbo.img
-        cp android-kernel/out/arch/${{ env.ARCH }}/boot/dts/vendor/qcom/kona-v2.1.dtb AnyKernel3/dtb
         rm -rf AnyKernel3/.git* AnyKernel3/README.md
 
     - name: Make boot image
