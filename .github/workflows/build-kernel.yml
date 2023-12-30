@@ -65,13 +65,27 @@ jobs:
       if: env.USE_CUSTOM_CLANG == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace
-        wget -O clang.tar.xz https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.2/clang+llvm-15.0.2-x86_64-unknown-linux-gnu-sles15.tar.xz
-        mkdir clang-aosp
-        tar -C clang-aosp/ -xf clang.tar.xz
-        echo '---------'
-        ls clang-aosp/
-        cp -r clang-aosp/*/* clang-aosp/
-        clang-aosp/bin/clang  -v
+        if [[ ${{ env.CUSTOM_CLANG_SOURCE }} =~ git ]]; then
+            if [[ ${{ env.CUSTOM_CLANG_SOURCE }} == *'.tar.gz' ]]; then
+                wget -O clang.tar.gz ${{ env.CUSTOM_CLANG_SOURCE }}
+                mkdir clang-aosp
+                tar -C clang-aosp/ -zxvf clang.tar.gz
+            else
+                git clone ${{ env.CUSTOM_CLANG_SOURCE }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
+            fi
+        else if [[ ${{ env.CUSTOM_CLANG_SOURCE }} == *'.tar.xz' ]]; then
+            wget -O clang.tar.xz ${{ env.CUSTOM_CLANG_SOURCE }}
+            mkdir clang-aosp
+            tar -C clang-aosp/ -xf clang.tar.xz
+            echo '---------'
+            ls clang-aosp/
+            cp -r clang-aosp/*/* clang-aosp/
+            clang-aosp/bin/clang  -v 
+        else
+            wget -O clang.zip ${{ env.CUSTOM_CLANG_SOURCE }}
+            mkdir clang-aosp
+            unzip clang.zip -d clang-aosp/
+        fi        
       
 
     - name: Download Gcc-aosp
