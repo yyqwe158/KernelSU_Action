@@ -100,7 +100,7 @@ jobs:
 
         if [ ${{ env.ENABLE_GCC_ARM32 }} = true ]; then
             mkdir gcc-32
-            $ git clone https://github.com/theradcolor/arm-linux-gnueabi gcc-32 --depth=1
+            git clone https://github.com/theradcolor/arm-linux-gnueabi gcc-32 --depth=1
             echo "GCC_32=CROSS_COMPILE_ARM32=$GITHUB_WORKSPACE/kernel_workspace/gcc-32/bin/arm-linux-androideabi-" >> $GITHUB_ENV
         fi
     - name: Download  gas
