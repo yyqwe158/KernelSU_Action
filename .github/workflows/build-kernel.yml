@@ -73,7 +73,7 @@ jobs:
             else
                 git clone ${{ env.CUSTOM_CLANG_SOURCE }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang-aosp --depth=1
             fi
-        else if [[ ${{ env.CUSTOM_CLANG_SOURCE }} == *'.tar.xz' ]]; then
+        elif  [[ ${{ env.CUSTOM_CLANG_SOURCE }} == *'.tar.xz' ]]; then
             wget -O clang.tar.xz ${{ env.CUSTOM_CLANG_SOURCE }}
             mkdir clang-aosp
             tar -C clang-aosp/ -xf clang.tar.xz
