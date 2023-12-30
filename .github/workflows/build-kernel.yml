@@ -69,7 +69,7 @@ jobs:
         mkdir clang-aosp
         tar -C clang-aosp/ -xf clang.tar.xz
         echo '---------'
-        cp -r clang-aosp/llvmorg-17.0.6/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/* clang-aosp/
+        cp -r clang-aosp/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04/* clang-aosp/
         clang-aosp/bin/clang  -v
       
 
