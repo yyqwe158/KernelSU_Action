@@ -147,7 +147,8 @@ jobs:
             curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
             echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
         else
-            if git apply --check $GITHUB_WORKSPACE/kernel_workspace/KernelSU_Action/KernelSU.patch ; then
+            wget https://raw.githubusercontent.com/maju-blogs/KernelSU_Action/master/KernelSU.patch
+            if git apply --check KernelSU.patch ; then
                 git apply $GITHUB_WORKSPACE/kernel_workspace/KernelSU_Action/KernelSU.patch
                 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
                 echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
